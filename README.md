@@ -1,2 +1,2 @@
-# memorablepearls_flutter
+# Pathinder App
  App of Pathfinder on Flutter
