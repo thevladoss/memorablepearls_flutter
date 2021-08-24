@@ -1,0 +1,92 @@
+name: memorablepearls_flutter
+description: App of Pathinder on Flutter
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 2.0.2
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  printing: any
+  advance_pdf_viewer: any
+  shared_preferences: any
+  flutter_html: ^0.8.2
+  share: any
+  intl: any
+  url_launcher: any
+  flutter_launcher_icons: any
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+#  cupertino_icons: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/LOGO.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/pdf/1s.pdf
+    - assets/pdf/2s.pdf
+    - assets/pdf/3s.pdf
+    - assets/pdf/4s.pdf
+    - assets/pdf/5s.pdf
+    - assets/pdf/6s.pdf
+    - assets/text/1s.json
+    - assets/text/2s.json
+    - assets/text/3s.json
+    - assets/text/4s.json
+    - assets/text/5s.json
+    - assets/text/6s.json
+    - assets/stripes/activity.json
+    - assets/stripes/adra.json
+    - assets/stripes/art.json
+    - assets/stripes/country.json
+    - assets/stripes/dom.json
+    - assets/stripes/duh.json
+    - assets/stripes/health.json
+    - assets/stripes/nature.json
+    - assets/stripes/pro.json
+    - assets/stripes/special.json
+    - assets/LOGO.png
+    - assets/LOGO2.png
+    - assets/photos/1.png
+    - assets/photos/2.png
+    - assets/photos/3.png
+    - assets/photos/4.png
+    - assets/photos/5.png
+    - assets/photos/6.png
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages

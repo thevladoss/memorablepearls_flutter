@@ -1,0 +1,184 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:memorablepearls_flutter/main.dart';
+
+enum Translates {bti, rst}
+
+class HelloPage extends StatefulWidget {
+  Function callbackApp;
+  Function callbackMain;
+
+  HelloPage(this.callbackApp, this.callbackMain);
+
+  @override
+  _HelloPageState createState() => _HelloPageState();
+}
+
+class _HelloPageState extends State<HelloPage> {
+  int segmentedControlGroupValue = 0;
+  final Map<int, Widget> myTabs = const <int, Widget>{
+    0: Text("ИПБ"),
+    1: Text("Синодальный")
+  };
+  bool _isDark = false;
+  final nameController = new TextEditingController();
+  final cityController = new TextEditingController();
+  String nameErrorText;
+  String cityErrorText;
+
+  @override
+  Widget build(BuildContext context) {
+    Color color;
+    final theme = Theme.of(context);
+    if (theme.brightness == Brightness.dark) {
+      color = secondary;
+    } else {
+      color = primary;
+    }
+    saveString("translate", "bti");
+    return ListView(
+      padding: EdgeInsets.all(16),
+      children: <Widget>[
+        Container(
+          child: TextFormField(
+            autofocus: true,
+            cursorColor: color,
+            controller: nameController,
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.person),
+              labelText: "Введите ваше имя",
+              errorText: nameErrorText,
+              border: OutlineInputBorder(),
+            ),
+          )
+        ),
+        Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+        Container(
+          child: TextFormField(
+            cursorColor: color,
+            controller: cityController,
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.location_city),
+              errorText: cityErrorText,
+              labelText: "Введите ваш город",
+              border: OutlineInputBorder(),
+            ),
+          ),
+        ),
+        Padding(padding: EdgeInsets.only(top: 8)),
+        CupertinoSlidingSegmentedControl(
+          padding: EdgeInsets.all(4.0),
+          groupValue: segmentedControlGroupValue,
+          children: myTabs,
+          onValueChanged: (i) {
+            setState(() {
+              switch (i) {
+                case 0:
+                  saveString("translate", "bti");
+                  break;
+                case 1:
+                  saveString("translate", "rst");
+                  break;
+              }
+              segmentedControlGroupValue = i;
+            });
+          }),
+        ListTile(
+          title: const Text('Темная тема', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+          trailing: CupertinoSwitch(
+            activeColor: theme.accentColor,
+            value: _isDark,
+            onChanged: (bool value) {
+              setState(() {
+                _isDark = value;
+              });
+              if (_isDark) {
+                saveString("theme", "dark");
+                this.widget.callbackApp(ThemeMode.dark);
+              } else {
+                saveString("theme", "light");
+                this.widget.callbackApp(ThemeMode.light);
+              }
+            },
+          ),
+          onTap: () {
+            setState(() {
+              _isDark = !_isDark;
+            });
+            if (_isDark) {
+              saveString("theme", "dark");
+              this.widget.callbackApp(ThemeMode.dark);
+            } else {
+              saveString("theme", "light");
+              this.widget.callbackApp(ThemeMode.light);
+            }
+          },
+
+        ),
+
+        // Column(
+        //   children: <Widget>[
+        //     RadioListTile<Translates>(
+        //       title: const Text('Институт перевода Библии', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),),
+        //       value: Translates.bti,
+        //       groupValue: _translate,
+        //       onChanged: (Translates value) {
+        //         setState(() {
+        //           _translate = value;
+        //         });
+        //       },
+        //     ),
+        //     RadioListTile<Translates>(
+        //       title: const Text('Синодальный перевод', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),),
+        //       value: Translates.rst,
+        //       groupValue: _translate,
+        //       onChanged: (Translates value) {
+        //         setState(() {
+        //           _translate = value;
+        //         });
+        //       },
+        //     ),
+        //   ],
+        // ),
+
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(primary)
+          ),
+          onPressed: () {
+            var isOk = true;
+            if(nameController.text.isEmpty) {
+              isOk = false;
+              setState(() {
+                nameErrorText = "Вы не ввели свое имя";
+              });
+            } else {
+              setState(() {
+                nameErrorText = null;
+              });
+            }
+            if(cityController.text.isEmpty) {
+              isOk = false;
+              setState(() {
+                cityErrorText = "Вы не ввели свой город";
+              });
+            } else {
+              setState(() {
+                cityErrorText = null;
+              });
+            }
+            if(isOk) {
+              saveString("name", nameController.text);
+              saveString("city", cityController.text);
+
+              saveString("isAuth", "true");
+
+              this.widget.callbackMain();
+            }
+          },
+          child: Text('Далее', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),),
+        )
+      ],
+    );
+  }
+}
