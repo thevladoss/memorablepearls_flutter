@@ -1,2 +1,2 @@
-# Pathinder App
- App of Pathfinder on Flutter
+# Приложение следопыт
+Приложение Следопыт на Flutter
