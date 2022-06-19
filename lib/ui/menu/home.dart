@@ -7,7 +7,7 @@ import 'package:memorablepearls_flutter/main.dart';
 import 'package:memorablepearls_flutter/ui/memorablepearls/detail.dart';
 import 'package:memorablepearls_flutter/ui/menu/archive.dart';
 import 'package:memorablepearls_flutter/ui/stripes/detail.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
